@@ -28,7 +28,7 @@ window.onload = function() {
     // cor de fundo
        backgroundColor: 0x000000,
     // cenas usadas nesse jogo
-       scene: [playGame]
+       scene: [playGame, Cena2]
     };
  
     // construtur do jogo ???
@@ -101,7 +101,7 @@ class playGame extends Phaser.Scene{
         this.pin = this.add.sprite(game.config.width / 2, game.config.height / 2, "pin");
  
         // adding the text field
-        this.prizeText = this.add.text(game.config.width / 2, game.config.height - 20, "Spin the wheel", {
+        this.prizeText = this.add.text(game.config.width / 2, game.config.height - 20, "Roda a roda", {
             font: "bold 32px Arial",
             align: "center",
             color: "white"
@@ -164,13 +164,58 @@ class playGame extends Phaser.Scene{
                 onComplete: function(tween){
  
                     // displaying prize text
-                    this.prizeText.setText(gameOptions.slicePrizes[prize]+String(prize));
+                    //this.prizeText.setText(gameOptions.slicePrizes[prize]+String(prize));
                     //this.prizeText.setText(prize);
  
                     // player can spin again
+                    
                     this.canSpin = true;
+                    
+                    this.prizeText.setText("Prêmio: "+gameOptions.slicePrizes[prize]+" Click para sair")
+                    
+                    this.input.once('pointerdown', function () {
+
+                        // tempo ?
+                        console.log('Saindo da roda da fortuna...');
+                        
+                        this.scene.start('Cena2');
+
+                    }, this);
+                                
+                
+
                 }
             });
         }
     }
 }
+var Cena2 = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function Cena2 ()
+    {
+        Phaser.Scene.call(this, { key: 'Cena2' });
+    },
+
+    preload: function ()
+    {
+        this.load.image('teste', 'assets/teste.png');
+    },
+
+    create: function ()
+    {
+        this.add.sprite(400, 300, 'teste');//.setAlpha(0.2);
+
+        this.input.once('pointerdown', function () {
+
+            console.log('Entrando para a roda da fortuna...');
+
+            this.scene.start('PlayGame');
+
+        }, this);
+    }
+
+});
