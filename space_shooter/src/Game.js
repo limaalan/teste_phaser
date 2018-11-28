@@ -1,32 +1,3 @@
-class SceneMainMenu extends Phaser.Scene {
-    constructor() {
-        super("SceneMainMenu");
-    }
-
-
-    create(){
-        console.log("Cena Criada");
-        //this.scene.start("SceneMain");
-    }
-
-}
-
-
-class SceneMain extends Phaser.Scene {
-    constructor (){
-        super("SceneMain");
-    }
-
-}
-
-class SceneGameOver extends Phaser.Scene{
-    constructor() {
-        super({key:"SceneGameOver"});
-    }
-
-}
-
-
 var gameConfig = {
     type : Phaser.WEBGL,
     width : 480 ,
